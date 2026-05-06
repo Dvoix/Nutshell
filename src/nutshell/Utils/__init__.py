@@ -3,6 +3,7 @@ __all__ = (
     "method_name_to_snake_case",
     "method_name_to_upper_camel_case",
     "ri_sdk_method_name_wo_prefix",
+    "generate_short_link",
 )
 
 from .case_converter import (
@@ -11,3 +12,5 @@ from .case_converter import (
     method_name_to_upper_camel_case,
     ri_sdk_method_name_wo_prefix,
 )
+
+from .shortener import generate_short_link

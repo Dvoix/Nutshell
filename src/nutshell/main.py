@@ -1,8 +1,13 @@
 import uvicorn
-from nutshell.config import settings
 from fastapi import FastAPI
 
+from nutshell.config import settings
+
+from nutshell.Links import views 
+
 app = FastAPI()
+
+app.include_router(views.router)
 
 if __name__ == "__main__":
     uvicorn.run(

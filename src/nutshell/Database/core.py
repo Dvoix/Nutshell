@@ -1,3 +1,4 @@
+import logging
 from collections.abc import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import (
@@ -7,7 +8,10 @@ from sqlalchemy.ext.asyncio import (
   AsyncSession,
 )
 
-from config import settings
+from nutshell.config import settings
+
+
+log = logging.getLogger(__name__)
 
 
 class DatabaseHelper:
@@ -26,7 +30,7 @@ class DatabaseHelper:
       max_overflow=max_overflow,
       pool_size=pool_size,
     )
-    self.session_factory = async_sessionmaker[AsyncSession] = async_sessionmaker(
+    self.session_factory: async_sessionmaker[AsyncSession] = async_sessionmaker(
       bind=self.engine,
       autoflush=False,
       expire_on_commit=False,

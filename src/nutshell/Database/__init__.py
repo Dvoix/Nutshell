@@ -1,6 +1,6 @@
 __all__ = (
-  "core",
+  "*",
 )
 
 
-from .core import core
+from .core import *
