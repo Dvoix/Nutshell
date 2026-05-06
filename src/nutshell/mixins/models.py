@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from sqlalchemy import func, MetaData
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, declared_attr
 
-from .Utils import camel_case_to_snake_case
+from nutshell.Utils import camel_case_to_snake_case
 from nutshell.config import settings
 
 class Base(DeclarativeBase):
@@ -24,11 +24,11 @@ def get_current_dt() -> datetime:
 
 
 class IntIdPkMixin:
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
 
 
 class CreatedAtMixin:
     created_at: Mapped[datetime] = mapped_column(
-        default=get_current_dt,
         server_default=func.now(),
+        nullable=False,
     )

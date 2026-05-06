@@ -3,7 +3,7 @@ from fastapi import FastAPI
 
 from nutshell.config import settings
 
-from nutshell.Links import views 
+from nutshell.links import views 
 
 app = FastAPI()
 

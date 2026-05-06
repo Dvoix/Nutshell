@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.Database import db_helper
+from nutshell.database import db_helper
 
 
 from .repository import create_short_link

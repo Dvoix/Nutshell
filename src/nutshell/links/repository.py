@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
 
 from nutshell.Utils import generate_short_link
-from .models import links
+from nutshell.links.models import Link
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +11,7 @@ async def create_short_link(session: AsyncSession, original_url: str, max_retrie
     for attempt in range(max_retries):
         short_code = generate_short_link()
         
-        new_link = links(
+        new_link = Link(
             original_url=str(original_url),
             short_code=short_code
         )

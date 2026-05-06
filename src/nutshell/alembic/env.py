@@ -1,5 +1,5 @@
 import sys
-import os
+from pathlib import Path
 
 import asyncio
 from logging.config import fileConfig
@@ -10,10 +10,11 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
-from nutshell.models import Base
-from config import settings
+from nutshell.mixins.models import Base
+from nutshell.config import settings
+from nutshell.links.models import Link
 
-sys.path.append(os.path.abspath("src"))
+sys.path.append(str(Path(__file__).resolve().parents[2]))
 
 config = context.config
 
