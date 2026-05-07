@@ -106,3 +106,10 @@ ignore = [
   "TRY003",  # long exception messages from `tryceratops`
   "RUF029",  # we decide `async` functions based on API, not `await` usage
   "RUF067",]  # wps handles `__init__.py` logic better
+
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

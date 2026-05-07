@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from sqlalchemy import func, MetaData
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, declared_attr
 
-from nutshell.Utils import camel_case_to_snake_case
+from nutshell.utils import camel_case_to_snake_case
 from nutshell.config import settings
 
 class Base(DeclarativeBase):
