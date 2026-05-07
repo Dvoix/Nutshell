@@ -1,3 +1,5 @@
+from os import link
+
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -17,10 +19,9 @@ async def short_link_response(
   session: AsyncSession = Depends(db_helper.session_getter)
 )-> dict[str, Link]:
   
-  short_code = await create_short_link(session, data)
+  short_code = await create_short_link(session, data.original_url)
   if not short_code:
     raise HTTPException(
       status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
       detail="Could not generate unique short code try again")
-  
-  return {"short_code": short_code}
+  return short_code

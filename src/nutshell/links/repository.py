@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 async def create_short_link(session: AsyncSession, original_url: str, max_retries: int = 5):
     for attempt in range(max_retries):
-        short_code = ()
+        short_code = generate_short_code()
         
         new_link = Link(
             original_url=str(original_url),

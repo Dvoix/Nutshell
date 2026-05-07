@@ -2,9 +2,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String
 
 
-from nutshell.mixins.models import Base, CreatedAtMixin, IntIdPkMixin
-
-class Link(IntIdPkMixin, CreatedAtMixin, Base):
+from nutshell.mixins.models import Base, CreatedAtMixin, IdPrimaryKeyMixin
+class Link(IdPrimaryKeyMixin, CreatedAtMixin, Base):
     __tablename__ = "links"
 
     original_url: Mapped[str] = mapped_column(nullable=False)
