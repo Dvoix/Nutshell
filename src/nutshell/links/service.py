@@ -14,7 +14,7 @@ class LinkService:
         self.session = session
         self.repo = LinkRepository(session)
 
-    async def create_short_link(self, original_url: str, max_retries: int = 5):
+    async def create_short_code(self, original_url: str, max_retries: int = 5):
         for attempt in range(max_retries):
             short_code = generate_short_code()
 

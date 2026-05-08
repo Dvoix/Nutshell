@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from nutshell.database import db_helper
 
-from nutshell.links.models import LinkORM
+from nutshell.links.repository import LinkORM
 from nutshell.links.service import LinkService
 from nutshell.links.schemas import URLCreate, URLOut
 
@@ -12,12 +12,12 @@ from nutshell.links.schemas import URLCreate, URLOut
 router = APIRouter()
 
 @router.post("/shorten", response_model=URLOut, status_code=status.HTTP_201_CREATED)
-async def short_link_response(
+async def create_short_link(
   data: URLCreate, 
   session: AsyncSession = Depends(db_helper.session_getter)
-):
+) -> LinkORM:
   service = LinkService(session)
-  short_code = await service.create_short_link(str(data.original_url))
+  short_code = await service.create_short_code(str(data.original_url))
   
   if not short_code:
     
