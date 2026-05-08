@@ -1,32 +1,27 @@
-import logging
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.exc import IntegrityError
 
-from nutshell.utils import generate_short_code
-from nutshell.links.models import Link
+from nutshell.links.models import LinkORM
 
-logger = logging.getLogger(__name__)
 
-async def create_short_link(session: AsyncSession, original_url: str, max_retries: int = 5):
-    for attempt in range(max_retries):
-        short_code = generate_short_code()
-        
-        new_link = Link(
-            original_url=str(original_url),
-            short_code=short_code
+class LinkRepository:
+    def __init__(self, session: AsyncSession):
+        self.session = session
+    
+    async def create(self, original_url: str) -> LinkORM:
+        link = LinkORM(original_url=str(original_url))
+
+        self.session.add(link)
+
+        await self.session.flush()
+
+        return link
+    
+    async def get_by_code(self, short_code: str) -> LinkORM | None:
+        result = await self.session.execute(
+            select(LinkORM).where(LinkORM.short_code == short_code)
         )
-        
-        session.add(new_link)
-        
-        try:
-            await session.commit()
-            await session.refresh(new_link)
-            return new_link
-        
-        except IntegrityError:
-            await session.rollback()
-            logger.warning(
-              f"Collision detected for code: {short_code}. Retrying... (Attempt {attempt + 1})")
-            continue
+        return result.scalar_one_or_none()
 
-    raise RuntimeError(f"Could not generate a unique short link after {max_retries} attempts.")
+    async def delete(self, link: LinkORM) -> None:
+        await self.session.delete(link)
