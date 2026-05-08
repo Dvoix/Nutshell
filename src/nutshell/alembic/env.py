@@ -13,6 +13,7 @@ from alembic import context
 from nutshell.mixins.models import Base
 from nutshell.config import settings
 from nutshell.links.models import Link
+from nutshell.users.models import User
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
