@@ -33,7 +33,7 @@ class LinkService:
             except IntegrityError:
                 await self.session.rollback()
                 logger.warning(
-                    f"Collision detected for code: {short_code}. " 
+                    f"Collision detected for code: {short_code}." 
                     f"Retrying... (Attempt {attempt + 1})")
                 continue
 
