@@ -17,26 +17,20 @@ class LinkService:
     async def create_short_code(self, url: str, max_retries: int = 5):
         for attempt in range(max_retries):
             short_code = generate_short_code()
-
-            short_link = LinkORM(
-                url=str(url),
-                short_code=short_code
-            )
-
-            self.session.add(short_link)
-
+            
             try:
+                link = await self.repo.create(url, short_code)
                 await self.session.commit()
-                await self.session.refresh(short_link)
-                return short_link
-
+                return link
+            
+            
             except IntegrityError:
                 await self.session.rollback()
                 logger.warning(
                     f"Collision detected for code: {short_code}." 
                     f"Retrying... (Attempt {attempt + 1})")
                 continue
-
+            
         raise RuntimeError(
             f"Could not generate a unique short link after {max_retries} attempts."
         )

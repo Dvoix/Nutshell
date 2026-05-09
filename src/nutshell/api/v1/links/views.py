@@ -25,21 +25,21 @@ async def create_short_link(
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="URL is too long")
-
-
+        
+        
   existing = None
-
+  
   if existing:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="Short URL already exists")
-
-
+        
+        
   if short_code is None:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Could not generate unique short code")
-  
+            
   return short_code
 
 
