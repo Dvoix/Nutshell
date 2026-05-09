@@ -16,10 +16,10 @@ from nutshell.enums import UserRole
 
 
 if TYPE_CHECKING:
-    from nutshell.links.models import Link
+    from nutshell.database.links.models import LinkORM
 
 
-class User(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveMixin):
+class UserORM(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveMixin):
   __tablename__ = "users"
   
   username: Mapped[str] = mapped_column(String(30), unique=True, index=True, nullable=False)
@@ -30,4 +30,5 @@ class User(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveMixi
     nullable=False
     )
   
-  links: Mapped[List["Link"]] = relationship(back_populates="owner", cascade="all, delete-orphan")
+  links: Mapped[
+    List["LinkORM"]] = relationship(back_populates="owner", cascade="all, delete-orphan")
