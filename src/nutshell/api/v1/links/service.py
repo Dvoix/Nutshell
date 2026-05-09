@@ -2,9 +2,9 @@ import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
 
-from nutshell.links.repository import LinkRepository
+from nutshell.api.v1.links.repository import LinkRepository
 from nutshell.utils import generate_short_code
-from nutshell.links.models import LinkORM
+from nutshell.database.links.models import LinkORM
 
 logger = logging.getLogger(__name__)
 
@@ -14,12 +14,12 @@ class LinkService:
         self.session = session
         self.repo = LinkRepository(session)
 
-    async def create_short_code(self, original_url: str, max_retries: int = 5):
+    async def create_short_code(self, url: str, max_retries: int = 5):
         for attempt in range(max_retries):
             short_code = generate_short_code()
 
             short_link = LinkORM(
-                original_url=str(original_url),
+                url=str(url),
                 short_code=short_code
             )
 

@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.links.models import LinkORM
+from nutshell.database.links.models import LinkORM
 
 
 class LinkRepository:

@@ -16,7 +16,7 @@ from nutshell.enums import UserRole
 
 
 if TYPE_CHECKING:
-    from nutshell.links.models import LinkORM
+    from nutshell.database.links.models import LinkORM
 
 
 class UserORM(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveMixin):

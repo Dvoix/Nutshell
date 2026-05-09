@@ -8,13 +8,13 @@ from nutshell.mixins.models import Base, CreatedAtMixin, IdPrimaryKeyMixin
 
 
 if TYPE_CHECKING:
-    from nutshell.users.models import UserORM
+    from nutshell.database.users.models import UserORM
 
 
 class LinkORM(IdPrimaryKeyMixin, CreatedAtMixin, Base):
     __tablename__ = "links"
 
-    original_url: Mapped[str] = mapped_column(nullable=False)
+    url: Mapped[str] = mapped_column(nullable=False)
 
     short_code: Mapped[str] = mapped_column(
         String(16),

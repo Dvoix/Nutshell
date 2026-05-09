@@ -4,9 +4,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from nutshell.database import db_helper
 
-from nutshell.links.repository import LinkORM
-from nutshell.links.service import LinkService
-from nutshell.links.schemas import UrlIn, UrlOut
+from nutshell.api.v1.links.repository import LinkORM
+from nutshell.api.v1.links.service import LinkService
+from nutshell.api.v1.links.schemas import UrlIn, UrlOut
 
 
 router = APIRouter()

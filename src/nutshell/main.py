@@ -3,9 +3,10 @@ from fastapi import FastAPI
 
 from nutshell.config import settings
 
-from nutshell.models import *
+from nutshell.database import LinkORM
+from nutshell.database import UserORM
 
-from nutshell.links import views 
+from nutshell.api.v1.links import views 
 
 app = FastAPI()
 
