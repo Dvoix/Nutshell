@@ -12,8 +12,8 @@ from alembic import context
 
 from nutshell.mixins.models import Base
 from nutshell.config import settings
-from nutshell.links.models import Link
-from nutshell.users.models import User
+from nutshell.database.links.models import LinkORM
+from nutshell.database.users.models import UserORM
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
