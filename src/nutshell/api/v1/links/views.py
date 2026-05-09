@@ -9,7 +9,8 @@ from nutshell.api.v1.links.service import LinkService
 from nutshell.api.v1.links.schemas import UrlIn, UrlOut
 
 
-router = APIRouter()
+router = APIRouter(tags=["Links"])
+
 
 @router.post("/shorten", response_model=UrlOut, status_code=status.HTTP_201_CREATED)
 async def create_short_link(

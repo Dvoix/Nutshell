@@ -6,11 +6,12 @@ from nutshell.config import settings
 from nutshell.database import LinkORM
 from nutshell.database import UserORM
 
-from nutshell.api.v1.links import views 
+from nutshell.api import router as api_router
+
 
 app = FastAPI()
 
-app.include_router(views.router)
+app.include_router(api_router)
 
 if __name__ == "__main__":
     uvicorn.run(
