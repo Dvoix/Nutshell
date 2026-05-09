@@ -6,18 +6,18 @@ from nutshell.database import db_helper
 
 from nutshell.links.repository import LinkORM
 from nutshell.links.service import LinkService
-from nutshell.links.schemas import URLCreate, URLOut
+from nutshell.links.schemas import UrlIn, UrlOut
 
 
 router = APIRouter()
 
-@router.post("/shorten", response_model=URLOut, status_code=status.HTTP_201_CREATED)
+@router.post("/shorten", response_model=UrlOut, status_code=status.HTTP_201_CREATED)
 async def create_short_link(
-  data: URLCreate, 
+  original: UrlIn, 
   session: AsyncSession = Depends(db_helper.session_getter)
 ) -> LinkORM:
   service = LinkService(session)
-  short_code = await service.create_short_code(str(data.original_url))
+  short_code = await service.create_short_code(str(original.url))
   
   if not short_code:
     
