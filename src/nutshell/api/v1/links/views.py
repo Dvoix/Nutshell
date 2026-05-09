@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
+from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from nutshell.database import db_helper
@@ -43,3 +44,11 @@ async def create_short_link(
   return short_code
 
 
+@router.get("/{short_code}", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+async def redirect_by_short_code(
+    short_code: str,
+    session: AsyncSession = Depends(db_helper.session_getter),
+):
+    return RedirectResponse(
+        url="https://google.com",
+    )

@@ -1,4 +1,5 @@
 import logging
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
 
@@ -10,11 +11,11 @@ logger = logging.getLogger(__name__)
 
 
 class LinkService:
-    def __init__(self, session: AsyncSession):
+    def __init__(self, session: AsyncSession) -> None:
         self.session = session
         self.repo = LinkRepository(session)
-
-    async def create_short_code(self, url: str, max_retries: int = 5):
+        
+    async def create_short_code(self, url: str, max_retries: int = 5) -> LinkORM:
         for attempt in range(max_retries):
             short_code = generate_short_code()
             
