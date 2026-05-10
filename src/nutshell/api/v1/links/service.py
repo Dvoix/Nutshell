@@ -35,3 +35,11 @@ class LinkService:
         raise RuntimeError(
             f"Could not generate a unique short link after {max_retries} attempts."
         )
+        
+    async def redirect(self, short_code: str) -> LinkORM | None:
+        redirect = await self.repo.get_by_code(short_code)
+        
+        if redirect is None:
+            return None
+        
+        return redirect

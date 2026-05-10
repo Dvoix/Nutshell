@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-
 from fastapi.responses import RedirectResponse
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from nutshell.database import db_helper
@@ -48,7 +48,11 @@ async def create_short_link(
 async def redirect_by_short_code(
     short_code: str,
     session: AsyncSession = Depends(db_helper.session_getter),
-):
-    return RedirectResponse(
-        url="https://google.com",
-    )
+) -> RedirectResponse:
+    service = LinkService(session)
+    redirect = await service.redirect(short_code)
+    
+    if redirect is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Link not found")
+    
+    return RedirectResponse(url=redirect.url)
