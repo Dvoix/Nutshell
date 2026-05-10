@@ -1,7 +1,12 @@
+import logging
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from nutshell.database.links.models import LinkORM
+
+
+logger = logging.getLogger(__name__)
 
 
 class LinkRepository:
@@ -18,7 +23,7 @@ class LinkRepository:
         await self.session.flush()
         return link
 
-    async def get_by_code(self, short_code: str) -> LinkORM | None:
+    async def get_by_short_code(self, short_code: str) -> LinkORM | None:
         result = await self.session.execute(
             select(LinkORM).where(LinkORM.short_code == short_code)
         )
