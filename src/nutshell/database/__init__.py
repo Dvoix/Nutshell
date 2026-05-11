@@ -1,7 +1,7 @@
 __all__ = (
-  "*",
-  "UserORM",
   "LinkORM",
+  "UserORM",
+  "*",
 )
 
 

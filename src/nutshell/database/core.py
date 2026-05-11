@@ -2,21 +2,20 @@ import logging
 from collections.abc import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import (
-  create_async_engine, 
-  AsyncEngine, 
-  async_sessionmaker, 
+  AsyncEngine,
   AsyncSession,
+  async_sessionmaker,
+  create_async_engine,
 )
 
 from nutshell.config import settings
-
 
 log = logging.getLogger(__name__)
 
 
 class DatabaseHelper:
   def __init__(
-    self, 
+    self,
     url: str,
     echo: bool = False,
     echo_pool: bool = False,
@@ -24,8 +23,8 @@ class DatabaseHelper:
     pool_size: int = 5
   ) -> None:
     self.engine: AsyncEngine = create_async_engine(
-      url=url, 
-      echo=echo, 
+      url=url,
+      echo=echo,
       echo_pool=echo_pool,
       max_overflow=max_overflow,
       pool_size=pool_size,
@@ -35,6 +34,7 @@ class DatabaseHelper:
       autoflush=False,
       expire_on_commit=False,
       )
+
   async def dispose(self) -> None:
     await self.engine.dispose()
 

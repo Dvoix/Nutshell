@@ -1,19 +1,15 @@
+import asyncio
 import sys
+from logging.config import fileConfig
 from pathlib import Path
 
-import asyncio
-from logging.config import fileConfig
-
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from alembic import context
-
-from nutshell.mixins.models import Base
 from nutshell.config import settings
-from nutshell.database.links.models import LinkORM
-from nutshell.database.users.models import UserORM
+from nutshell.mixins.models import Base
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
@@ -63,6 +59,7 @@ async def run_async_migrations() -> None:
 
 def run_migrations_online() -> None:
     asyncio.run(run_async_migrations())
+
 
 if context.is_offline_mode():
     run_migrations_offline()

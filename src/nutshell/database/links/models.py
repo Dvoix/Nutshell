@@ -1,11 +1,9 @@
 from typing import TYPE_CHECKING
 
+from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, ForeignKey
-
 
 from nutshell.mixins.models import Base, CreatedAtMixin, IdPrimaryKeyMixin
-
 
 if TYPE_CHECKING:
     from nutshell.database.users.models import UserORM

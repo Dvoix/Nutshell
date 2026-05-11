@@ -8,6 +8,6 @@ router = APIRouter(
   prefix=settings.api.v1.prefix
 )
 router.include_router(
-  links_router, 
+  links_router,
   prefix=settings.api.v1.links
 )
