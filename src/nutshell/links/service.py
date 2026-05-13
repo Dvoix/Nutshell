@@ -20,9 +20,9 @@ class LinkService:
             slug = generate_slug()
 
             try:
-                link = await self.repo.create(url, slug)
+                slug = await self.repo.create(url, slug)
                 await self.session.commit()
-                return link
+                return slug
 
             except IntegrityError:
                 await self.session.rollback()
@@ -32,7 +32,7 @@ class LinkService:
                 continue
 
         raise RuntimeError(
-            f"Could not generate a unique short link after {max_retries} attempts."
+            f"Could not generate a unique slug after {max_retries} attempts."
         )
 
     async def get_link_by_slug(self, slug: str) -> LinkORM | None:
