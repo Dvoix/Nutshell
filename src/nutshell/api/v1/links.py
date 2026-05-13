@@ -5,8 +5,8 @@ from fastapi.responses import RedirectResponse
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.api.v1.links.schemas import UrlIn, UrlOut
-from nutshell.api.v1.links.service import LinkService
+from nutshell.links.schemas import UrlIn, UrlOut
+from nutshell.links.service import LinkService
 from nutshell.database import db_helper
 
 logger = logging.getLogger(__name__)
@@ -15,7 +15,7 @@ router = APIRouter(tags=["Links"])
 
 
 @router.post("/shorten", response_model=UrlOut, status_code=status.HTTP_201_CREATED)
-async def create_short_link(
+async def create_slug(
     original: UrlIn,
     session: AsyncSession = Depends(db_helper.session_getter)
     ) -> UrlOut:
@@ -27,18 +27,18 @@ async def create_short_link(
             detail="URL is too long")
 
     service = LinkService(session)
-    short_code = await service.create_short_code(url)
+    slug = await service.create_slug(url)
 
-    return short_code
+    return slug
 
 
-@router.get("/{short_code}", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
-async def redirect_by_short_code(
-    short_code: str,
+@router.get("/{slug}", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+async def redirect_by_slug(
+    slug: str,
     session: AsyncSession = Depends(db_helper.session_getter),
     ) -> RedirectResponse:
     service = LinkService(session)
-    redirect = await service.get_link_by_short_code(short_code)
+    redirect = await service.get_link_by_slug(slug)
 
     if redirect is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Link not found")

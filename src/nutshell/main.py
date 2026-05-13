@@ -4,6 +4,8 @@ from fastapi import FastAPI
 from nutshell.api import router as api_router
 from nutshell.config import settings
 
+from nutshell.models_registry import *
+
 app = FastAPI()
 
 app.include_router(api_router)

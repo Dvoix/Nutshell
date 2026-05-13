@@ -13,7 +13,7 @@ from nutshell.mixins.models import (
 )
 
 if TYPE_CHECKING:
-    from nutshell.database.links.models import LinkORM
+    from nutshell.links.models import LinkORM
 
 
 class UserORM(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveMixin):

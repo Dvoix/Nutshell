@@ -8,4 +8,4 @@ class UrlIn(BaseModel):
 class UrlOut(UrlIn):
     model_config = ConfigDict(from_attributes=True)
 
-    short_code: str
+    slug: str

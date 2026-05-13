@@ -10,6 +10,8 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from nutshell.config import settings
 from nutshell.mixins.models import Base
+from nutshell.links.models import LinkORM
+from nutshell.users.models import UserORM
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 

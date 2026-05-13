@@ -3,9 +3,9 @@ import logging
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.api.v1.links.repository import LinkRepository
-from nutshell.database.links.models import LinkORM
-from nutshell.utils import generate_short_code
+from nutshell.links.repository import LinkRepository
+from nutshell.links.models import LinkORM
+from nutshell.utils import generate_slug
 
 logger = logging.getLogger(__name__)
 
@@ -15,19 +15,19 @@ class LinkService:
         self.session = session
         self.repo = LinkRepository(session)
 
-    async def create_short_code(self, url: str, max_retries: int = 5) -> LinkORM:
+    async def create_slug(self, url: str, max_retries: int = 5) -> LinkORM:
         for attempt in range(max_retries):
-            short_code = generate_short_code()
+            slug = generate_slug()
 
             try:
-                link = await self.repo.create(url, short_code)
+                link = await self.repo.create(url, slug)
                 await self.session.commit()
                 return link
 
             except IntegrityError:
                 await self.session.rollback()
                 logger.warning(
-                    f"Collision detected for code: {short_code}."
+                    f"Collision detected for code: {slug}."
                     f"Retrying... (Attempt {attempt + 1})")
                 continue
 
@@ -35,5 +35,5 @@ class LinkService:
             f"Could not generate a unique short link after {max_retries} attempts."
         )
 
-    async def get_link_by_short_code(self, short_code: str) -> LinkORM | None:
-        return await self.repo.get_by_short_code(short_code)
+    async def get_link_by_slug(self, slug: str) -> LinkORM | None:
+        return await self.repo.get_by_slug(slug)
