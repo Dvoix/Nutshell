@@ -231,3 +231,5 @@ settings/prod.py
 
 # Docker overrides
 docker-compose.override.yml
+
+certs/

@@ -8,7 +8,18 @@ class UserCreate(BaseModel):
   email: EmailStr
   password: str = Field(..., min_length=8)
 
-  class UserResponse(BaseModel):
+
+
+class UserAuth(BaseModel):
+    model_config = ConfigDict(strict=True)
+
+    username: str
+    password: bytes
+    email: EmailStr | None = None
+    active: bool = True
+
+
+class UserResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
