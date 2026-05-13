@@ -1,13 +1,10 @@
 import uvicorn
 from fastapi import FastAPI
 
+from nutshell.api import router as api_router
 from nutshell.config import settings
 
-from nutshell.database import LinkORM
-from nutshell.database import UserORM
-
-from nutshell.api import router as api_router
-
+from nutshell.models_registry import *
 
 app = FastAPI()
 
