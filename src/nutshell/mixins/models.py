@@ -1,10 +1,11 @@
 from datetime import datetime
 
-from sqlalchemy import func, MetaData, text
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, declared_attr
+from sqlalchemy import MetaData, func, text
+from sqlalchemy.orm import DeclarativeBase, Mapped, declared_attr, mapped_column
 
-from nutshell.utils import camel_case_to_snake_case
 from nutshell.config import settings
+from nutshell.utils import camel_case_to_snake_case
+
 
 class Base(DeclarativeBase):
     __abstract__ = True
