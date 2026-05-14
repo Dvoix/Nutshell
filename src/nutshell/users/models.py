@@ -21,6 +21,7 @@ class UserORM(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveM
 
   username: Mapped[str] = mapped_column(String(30), unique=True, index=True, nullable=False)
   email: Mapped[str] = mapped_column(String(255), unique=True, index=True, nullable=False)
+  password_hash: Mapped[str] = mapped_column(String(255), unique=False, nullable=False)
   role: Mapped[UserRole] = mapped_column(
     Enum(UserRole),
     default=UserRole.user,
