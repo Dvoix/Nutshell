@@ -3,10 +3,10 @@ import logging
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.auth.utils import AuthService
-from nutshell.users.models import UserORM
-from nutshell.users.repository import UserRepository
-from nutshell.users.schemas import UserCreate
+from backend.src.auth.utils import AuthService
+from backend.src.users.models import UserORM
+from backend.src.users.repository import UserRepository
+from backend.src.users.schemas import UserCreate
 
 
 logger = logging.getLogger(__name__)

@@ -4,7 +4,7 @@ from typing import Any
 import bcrypt
 import jwt
 
-from nutshell.config import settings
+from backend.src.config import settings
 
 
 class AuthService:

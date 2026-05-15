@@ -3,9 +3,9 @@ import logging
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.links.repository import LinkRepository
-from nutshell.links.models import LinkORM
-from nutshell.utils import generate_slug
+from backend.src.links.repository import LinkRepository
+from backend.src.links.models import LinkORM
+from backend.src.utils import generate_slug
 
 logger = logging.getLogger(__name__)
 

@@ -2,8 +2,8 @@ import logging
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.users.models import UserORM
-from nutshell.users.schemas import UserAuth
+from backend.src.users.models import UserORM
+from backend.src.users.schemas import UserAuth
 
 
 logger = logging.getLogger(__name__)

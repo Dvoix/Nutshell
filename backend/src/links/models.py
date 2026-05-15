@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from nutshell.mixins.models import Base, CreatedAtMixin, IdPrimaryKeyMixin
+from backend.src.mixins.models import Base, CreatedAtMixin, IdPrimaryKeyMixin
 
 if TYPE_CHECKING:
-    from nutshell.users.models import UserORM
+    from backend.src.users.models import UserORM
 
 
 class LinkORM(IdPrimaryKeyMixin, CreatedAtMixin, Base):

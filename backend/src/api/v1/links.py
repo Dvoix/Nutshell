@@ -5,9 +5,9 @@ from fastapi.responses import RedirectResponse
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.links.schemas import UrlIn, UrlOut
-from nutshell.links.service import LinkService
-from nutshell.database import db_helper
+from backend.src.links.schemas import UrlIn, UrlOut
+from backend.src.links.service import LinkService
+from backend.src.database import db_helper
 
 logger = logging.getLogger(__name__)
 

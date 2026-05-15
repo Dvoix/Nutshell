@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import (
   create_async_engine,
 )
 
-from nutshell.config import settings
+from backend.src.config import settings
 
 log = logging.getLogger(__name__)
 

@@ -8,10 +8,10 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from nutshell.config import settings
-from nutshell.mixins.models import Base
-from nutshell.links.models import LinkORM
-from nutshell.users.models import UserORM
+from backend.src.config import settings
+from backend.src.mixins.models import Base
+from backend.src.links.models import LinkORM
+from backend.src.users.models import UserORM
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 

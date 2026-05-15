@@ -3,8 +3,8 @@ from typing import TYPE_CHECKING
 from sqlalchemy import Enum, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from nutshell.enums import UserRole
-from nutshell.mixins.models import (
+from backend.src.enums import UserRole
+from backend.src.mixins.models import (
     Base,
     CreatedAtMixin,
     IdPrimaryKeyMixin,
@@ -13,7 +13,7 @@ from nutshell.mixins.models import (
 )
 
 if TYPE_CHECKING:
-    from nutshell.links.models import LinkORM
+    from backend.src.links.models import LinkORM
 
 
 class UserORM(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveMixin):

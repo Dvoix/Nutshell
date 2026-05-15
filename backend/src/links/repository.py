@@ -3,7 +3,7 @@ import logging
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from nutshell.links.models import LinkORM
+from backend.src.links.models import LinkORM
 
 logger = logging.getLogger(__name__)
 

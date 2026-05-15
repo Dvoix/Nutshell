@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from nutshell.config import settings
+from backend.src.config import settings
 
 from .v1 import router as api_v1_router
 
