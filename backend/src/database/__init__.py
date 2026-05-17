@@ -3,5 +3,5 @@ __all__ = (
 )
 
 
-from .core import *
+from .async_pg import *
 
