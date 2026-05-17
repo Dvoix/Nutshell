@@ -1,6 +1,7 @@
 import logging
 from collections.abc import AsyncGenerator
 
+from database.abstract_db import AbstractDataBaseProvider
 from sqlalchemy.ext.asyncio import (
   AsyncEngine,
   AsyncSession,
@@ -13,7 +14,7 @@ from backend.src.config import settings
 log = logging.getLogger(__name__)
 
 
-class DatabaseHelper:
+class AsyncPgDatabaseHelper(AbstractDataBaseProvider):
   def __init__(
     self,
     url: str,
@@ -40,10 +41,16 @@ class DatabaseHelper:
 
   async def session_getter(self) -> AsyncGenerator[AsyncSession, None]:
     async with self.session_factory() as session:
-      yield session
+      try:
+        yield session
+        await session.commit()
+      
+      except:
+        await session.rollback()
+        raise
 
 
-db_helper = DatabaseHelper(
+async_pg_db_helper = AsyncPgDatabaseHelper(
 url=str(settings.db.url),
 echo=settings.db.echo,
 echo_pool=settings.db.echo_pool,
