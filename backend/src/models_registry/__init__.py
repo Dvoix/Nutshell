@@ -1,7 +1,7 @@
 __all__ = (
-  "LinkORM", 
-  "UserORM"
+  "Link", 
+  "User"
   )
 
-from backend.src.links.models import LinkORM
-from backend.src.users.models import UserORM
+from backend.src.links.models import Link
+from backend.src.users.models import User
