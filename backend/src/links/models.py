@@ -6,10 +6,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from backend.src.mixins.models import Base, CreatedAtMixin, IdPrimaryKeyMixin
 
 if TYPE_CHECKING:
-    from backend.src.users.models import UserORM
+    from backend.src.users.models import User
 
 
-class LinkORM(IdPrimaryKeyMixin, CreatedAtMixin, Base):
+class Link(IdPrimaryKeyMixin, CreatedAtMixin, Base):
     __tablename__ = "links"
 
     url: Mapped[str] = mapped_column(nullable=False)
@@ -25,4 +25,4 @@ class LinkORM(IdPrimaryKeyMixin, CreatedAtMixin, Base):
         nullable=True,
     )
 
-    owner: Mapped["UserORM"] = relationship(back_populates="links")
+    owner: Mapped["User"] = relationship(back_populates="links")

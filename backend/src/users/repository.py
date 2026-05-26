@@ -1,8 +1,10 @@
 import logging
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.src.users.models import UserORM
+from backend.src.enums import UserRole
+from backend.src.users.models import User
 from backend.src.users.schemas import UserAuth
 
 
@@ -13,14 +15,40 @@ class UserRepository:
     def __init__(self, session: AsyncSession) -> None:
         self.session = session
 
-    async def create(self, user: UserAuth, password_hash: str) -> UserORM:
-        user_obj = UserORM(
+    async def create_user(self, user: UserAuth, password_hash: str) -> User:
+        user = User(
             username=user.username,
             email=user.email,
             password_hash=password_hash
         )
-
-        self.session.add(user_obj)
+        self.session.add(user)
         await self.session.flush()
+        return user
 
-        return user_obj
+    async def get_user_by_id(self, user_id: int) -> User | None:
+        result = await self.session.execute(
+            select(User).where
+            (User.id == user_id)
+        )
+        return result.scalar_one_or_none()
+    
+    async def get_user_by_email(self, email: str) -> User | None:
+        result = await self.session.execute(
+            select(User).where
+            (User.email == email)
+        )
+        return result.scalar_one_or_none()
+    
+    async def get_user_by_username(self, username: str) -> User | None:
+        result = await self.session.execute(
+            select(User).where
+            (User.username == username)
+        )
+        return result.scalar_one_or_none()
+
+    async def get_admin_user(self) -> User | None:
+        result = await self.session.execute(
+            select(User).where
+            (User.role == UserRole.admin)
+        )
+        return result
