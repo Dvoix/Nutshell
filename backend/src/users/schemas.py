@@ -9,7 +9,6 @@ class UserCreate(BaseModel):
   password: str = Field(..., min_length=8)
 
 
-
 class UserAuth(BaseModel):
     model_config = ConfigDict(strict=True)
 
@@ -26,17 +25,3 @@ class UserResponse(BaseModel):
     username: str
     email: str
     role: UserRole
-
-
-class LoginRequest(BaseModel):
-  username: str
-  password: str
-
-
-class Token(BaseModel):
-  access_token: str
-  token_type: str = "bearer"
-
-
-class TokenData(BaseModel):
-  user_id: int | None = None
