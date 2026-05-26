@@ -10,8 +10,8 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from backend.src.config import settings
 from backend.src.mixins.models import Base
-from backend.src.links.models import LinkORM
-from backend.src.users.models import UserORM
+from backend.src.links.models import Link
+from backend.src.users.models import User
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 

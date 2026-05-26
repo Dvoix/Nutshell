@@ -13,10 +13,10 @@ from backend.src.mixins.models import (
 )
 
 if TYPE_CHECKING:
-    from backend.src.links.models import LinkORM
+    from backend.src.links.models import Link
 
 
-class UserORM(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveMixin):
+class User(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveMixin):
   __tablename__ = "users"
 
   username: Mapped[str] = mapped_column(String(30), unique=True, index=True, nullable=False)
@@ -29,4 +29,4 @@ class UserORM(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin, IsActiveM
     )
 
   links: Mapped[
-    list["LinkORM"]] = relationship(back_populates="owner", cascade="all, delete-orphan")
+    list["Link"]] = relationship(back_populates="owner", cascade="all, delete-orphan")
