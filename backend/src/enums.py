@@ -8,3 +8,7 @@ class NutshellEnum(StrEnum):
 class UserRole(NutshellEnum):
   admin = "Admin"
   user = "User"
+
+class UserStatus(NutshellEnum):
+  active = "Active"
+  inactive = "Inactive"
