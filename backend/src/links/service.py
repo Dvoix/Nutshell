@@ -2,7 +2,7 @@ import logging
 
 from sqlalchemy.exc import IntegrityError
 
-from links.repository import LinkRepository
+from backend.src.links.repository import LinkRepository
 from backend.src.links.models import Link
 from backend.src.utils import generate_slug
 
