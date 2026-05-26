@@ -2,26 +2,12 @@ from fastapi import APIRouter, HTTPException, status, Depends
 
 
 from backend.src.dependencies.users import get_user_service
-from backend.src.users.schemas import UserCreate, UserResponse
+from backend.src.users.schemas import UserResponse
 from backend.src.users.service import UserService
 
 
 router = APIRouter(tags=["Users"])
 
-
-@router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
-async def register(
-  user: UserCreate,
-  service: UserService = Depends(get_user_service)
-  ) -> UserResponse:
-  user = await service.create_user(user)
-  
-  return {
-    "id": user.id,
-    "username": user.username,
-    "email": user.email,
-    "role": user.role,
-}
 
 @router.get("/id/{user_id}", response_model=UserResponse, status_code=status.HTTP_200_OK)
 async def get_user_by_id(

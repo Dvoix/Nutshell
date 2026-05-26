@@ -67,5 +67,5 @@ class AuthService:
 ) -> bool:
     return bcrypt.checkpw(
       password.encode(), 
-      hashed_password,
+      hashed_password.encode()
     )
