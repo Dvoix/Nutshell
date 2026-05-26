@@ -43,11 +43,3 @@ class UpdatedAtMixin:
         onupdate=func.now(),
         nullable=False,
     )
-
-
-class IsActiveMixin:
-    is_active: Mapped[bool] = mapped_column(
-        default=True,
-        server_default=text("true"),
-        nullable=False
-    )
