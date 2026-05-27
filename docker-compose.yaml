@@ -1,0 +1,36 @@
+services:
+  project:
+    build:
+      dockerfile: dockerfile
+      context: ./
+    environment:
+      NUTSHELL_CONFIG__DB__URL: postgresql+asyncpg://user:password@pg:5432/nutsshell_dev
+    ports:
+    - "8000:8000"
+
+
+  pg:
+    image: postgres:17.9
+    environment:
+      POSTGRES_DB: nutsshell_dev
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+    - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user -d nutsshell_dev" ]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      pg:
+        condition: service_healthy
