@@ -1,7 +1,7 @@
 import logging
 from collections.abc import AsyncGenerator
 
-from database.abstract_db import AbstractDataBaseProvider
+from backend.src.database.abstract_db import AbstractDataBaseProvider
 from sqlalchemy.ext.asyncio import (
   AsyncEngine,
   AsyncSession,

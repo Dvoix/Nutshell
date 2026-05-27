@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from enums import UserStatus
+from backend.src.enums import UserStatus
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
