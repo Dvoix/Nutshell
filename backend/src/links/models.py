@@ -15,9 +15,15 @@ class Link(IdPrimaryKeyMixin, CreatedAtMixin, Base):
     url: Mapped[str] = mapped_column(nullable=False)
 
     slug: Mapped[str] = mapped_column(
-        String(16),
-        unique=True,
+        String(50), 
+        unique=True, 
         nullable=False
+    )
+
+    custom_slug: Mapped[str] = mapped_column(
+        String(50), 
+        unique=False, 
+        nullable=True
     )
 
     owner_id: Mapped[int | None] = mapped_column(

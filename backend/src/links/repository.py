@@ -14,12 +14,22 @@ class LinkRepository:
 
     async def create_link(self, url: str, slug: str) -> Link:
         link = Link(
-            url=str(url),
+            url=str(url), 
             slug=slug
         )
         self.session.add(link)
         await self.session.flush()
         return link
+
+    async def create_link_with_custom_slug(self, url: str, custom_slug: str) -> Link:
+        custom_link = Link(
+            url=str(url),
+            slug=custom_slug,
+            custom_slug=custom_slug,
+        )
+        self.session.add(custom_link)
+        await self.session.flush()
+        return custom_link
 
     async def get_link_by_slug(self, slug: str) -> Link | None:
         result = await self.session.execute(
