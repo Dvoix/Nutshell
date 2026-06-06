@@ -38,4 +38,5 @@ class LinkRepository:
         return result.scalar_one_or_none()
 
     async def delete_link(self, link: Link) -> None:
-        self.session.delete(link)
+        await self.session.delete(link)
+
