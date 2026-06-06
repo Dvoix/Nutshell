@@ -39,18 +39,18 @@ class User(Base, IdPrimaryKeyMixin, CreatedAtMixin, UpdatedAtMixin):
     )
 
     role: Mapped[UserRole] = mapped_column(
-        Enum(UserRole, name='userrole'),
+        Enum(UserRole, name="userrole"),
         default=UserRole.user,
         nullable=False,
     )
 
     status: Mapped[UserStatus] = mapped_column(
-        Enum(UserStatus, name='userstatus'),
+        Enum(UserStatus, name="userstatus"),
         default=UserStatus.active,
         nullable=False,
     )
 
-    links: Mapped[list['Link']] = relationship(
-        back_populates='owner',
-        cascade='all, delete-orphan',
+    links: Mapped[list["Link"]] = relationship(
+        back_populates="owner",
+        cascade="all, delete-orphan",
     )
