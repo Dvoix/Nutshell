@@ -1,6 +1,6 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
-from sqlalchemy import MetaData, func, text
+from sqlalchemy import MetaData, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, declared_attr, mapped_column
 
 from backend.src.config import settings
@@ -16,7 +16,7 @@ class Base(DeclarativeBase):
 
     @declared_attr.directive
     def __tablename__(cls) -> str:
-        return f"{camel_case_to_snake_case(cls.__name__)}s"
+        return f'{camel_case_to_snake_case(cls.__name__)}s'
 
 
 class IdPrimaryKeyMixin:
@@ -24,8 +24,7 @@ class IdPrimaryKeyMixin:
 
 
 def get_current_dt() -> datetime:
-    dt = datetime.now()
-    return dt
+    return datetime.now(UTC)
 
 
 class CreatedAtMixin:
