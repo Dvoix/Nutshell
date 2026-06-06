@@ -2,11 +2,14 @@ import uvicorn
 from fastapi import FastAPI
 
 from backend.src.api import router as api_router
+from backend.src.models_registry import Link, User
+
 from backend.src.config import settings
 
-from backend.src.models_registry import *
 
 app = FastAPI()
+
+_registered_models = (Link, User)
 
 app.include_router(api_router)
 
